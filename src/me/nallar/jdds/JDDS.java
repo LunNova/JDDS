@@ -38,12 +38,17 @@ public class JDDS {
 			return loadBufferedImage(TEXImage.read(file));
 	}
 
-	public static BufferedImage readDDS(byte[] data) throws IOException {
+	public static BufferedImage readDDS(byte[] data) {
 		return readDDS(ByteBuffer.wrap(data));
 	}
 
-	public static BufferedImage readDDS(ByteBuffer data) throws IOException {
-		return loadBufferedImage(DDSImage.read(data));
+	public static BufferedImage readDDS(ByteBuffer data) {
+		try {
+			return loadBufferedImage(DDSImage.read(data));
+		} catch (IOException e) {
+			// Should never encounter IO Exception when reading from memory
+			throw new IOError(e);
+		}
 	}
 
 	/**

@@ -38,6 +38,14 @@ public class JDDS {
 			return loadBufferedImage(TEXImage.read(file));
 	}
 
+	public static BufferedImage readDDS(byte[] data) throws IOException {
+		return readDDS(ByteBuffer.wrap(data));
+	}
+
+	public static BufferedImage readDDS(ByteBuffer data) throws IOException {
+		return loadBufferedImage(DDSImage.read(data));
+	}
+
 	/**
 	 * Create a {@link BufferedImage} from a DXT-compressed {@link DDSImage}
 	 * @throws UnsupportedDataTypeException

@@ -73,7 +73,9 @@ public class DXTBufferDecompressor extends BufferDecompressor {
 
 		//Use JSquish to decompress images. Then bind as normal. 
 		if (type != null) {
-			return Squish.decompressImage(null, width, height, compressedData, type);
+			synchronized (Squish.class) {
+				return Squish.decompressImage(null, width, height, compressedData, type);
+			}
 		}
 
 		return compressedData;
